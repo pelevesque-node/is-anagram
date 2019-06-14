@@ -1,0 +1,233 @@
+/* global describe, it */
+'use strict'
+
+const expect = require('chai').expect
+const isAnagram = require('../index')
+
+describe('#isAnagram()', () => {
+  describe('should fail with inadequate strings', () => {
+    it('should return false when one string is empty', () => {
+      const str1 = ''
+      const str2 = 'abc'
+      const result = isAnagram(str1, str2)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return false when both strings are empty', () => {
+      const str1 = ''
+      const str2 = ''
+      const result = isAnagram(str1, str2)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return false when both strings are of different lengths', () => {
+      const str1 = 'abcde'
+      const str2 = 'abcdefghij'
+      const result = isAnagram(str1, str2)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+  })
+
+  describe('simple anagrams (no options)', () => {
+    it('should return false when it is not an anagram', () => {
+      const str1 = 'elvis'
+      const str2 = 'milou'
+      const result = isAnagram(str1, str2)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return true when both strings are the same', () => {
+      const str1 = 'elvis'
+      const str2 = 'elvis'
+      const result = isAnagram(str1, str2)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    it('should return true for an anagram', () => {
+      const str1 = 'elvis'
+      const str2 = 'lives'
+      const result = isAnagram(str1, str2)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+  })
+
+  describe('anagrams with the numbered group option', () => {
+    it('should return false when it is not an anagram', () => {
+      const str1 = '123aaa345'
+      const str2 = 'a123a345a'
+      const options = { group: 3 }
+      const result = isAnagram(str1, str2, options)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return true for an anagram', () => {
+      const str1 = '123aaa345'
+      const str2 = '345123aaa'
+      const options = { group: 3 }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    it('should return true for an anagram with a tail (extra chars after grouping)', () => {
+      const str1 = '123aaa345f'
+      const str2 = '345f123aaa'
+      const options = { group: 3 }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    describe('with other options', () => {
+      it('should return false when grouping is not respected', () => {
+        const str1 = ' AmwÉ23 45$$'
+        const str2 = '5n4$$ v2a3ve$$a '
+        const options = {
+          group: 2,
+          substringsToIgnore: [' ', '$$'],
+          canonicalize: true
+        }
+        const result = isAnagram(str1, str2, options)
+        const expected = false
+        expect(result).to.equal(expected)
+      })
+
+      it('should return true when grouping is respected', () => {
+        const str1 = ' AmwÉ23 45$$'
+        const str2 = '45$$ nv23ve$$ar '
+        const options = {
+          group: 2,
+          substringsToIgnore: [' ', '$$'],
+          canonicalize: true
+        }
+        const result = isAnagram(str1, str2, options)
+        const expected = true
+        expect(result).to.equal(expected)
+      })
+    })
+  })
+
+  describe('anagrams with the explicit group option', () => {
+    it('should return false when it is not an anagram', () => {
+      const str1 = 'a12bbb3'
+      const str2 = 'ba1bb32'
+      const options = { group: ['a', '12', 'bbb', '3'] }
+      const result = isAnagram(str1, str2, options)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return true for an anagram', () => {
+      const str1 = '1a12bbb32'
+      const str2 = '12bbb3a12'
+      const options = { group: ['a', '1', '2', '12', 'bbb', '3'] }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    describe('with other options', () => {
+      it('should return false when grouping is not respected', () => {
+        const str1 = ' AmwÉ23 45$$'
+        const str2 = '23n$$ ve$$arv 45 '
+        const options = {
+          group: ['ar', 'n', 'v', 've', '2345'],
+          substringsToIgnore: [' ', '$$'],
+          canonicalize: true
+        }
+        const result = isAnagram(str1, str2, options)
+        const expected = false
+        expect(result).to.equal(expected)
+      })
+
+      it('should return true when grouping is respected', () => {
+        const str1 = ' AmwÉ23 45$$'
+        const str2 = '2345n$$ ve$$arv '
+        const options = {
+          group: ['ar', 'n', 'v', 've', '2345'],
+          substringsToIgnore: [' ', '$$'],
+          canonicalize: true
+        }
+        const result = isAnagram(str1, str2, options)
+        const expected = true
+        expect(result).to.equal(expected)
+      })
+    })
+  })
+
+  describe('substringsToIgnore option', () => {
+    it('should be null by default', () => {
+      const str1 = 'christmas tree'
+      const str2 = 'search, set, trim'
+      const result = isAnagram(str1, str2)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should work with single chars', () => {
+      const str1 = 'christmas tree'
+      const str2 = 'search, set, trim'
+      const options = { substringsToIgnore: [',', ' '] }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    it('should work with substrings of any length', () => {
+      const str1 = 'christmas tree ignoreMe'
+      const str2 = 'search, set, trim doNotIncludeMe'
+      const options = { substringsToIgnore: [',', ' ', 'ignoreMe', 'doNotIncludeMe'] }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    it('should work with all single chars that must be escaped in regex', () => {
+      const str1 = 'elvis[\\^$.|?*+()'
+      const str2 = '[\\^$.|?*+()lives'
+      const options = { substringsToIgnore: [
+        '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'
+      ] }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+
+    it('should work with all substrings of any length that must be escaped in regex', () => {
+      const str1 = 'elvis[[[\\\\\\^^^$$$...|||???***+++((()))'
+      const str2 = '[[[\\\\\\^^^$$$...|||???***+++((()))lives'
+      const options = { substringsToIgnore: [
+        '[[[', '\\\\\\', '^^^', '$$$', '...', '|||', '???', '***', '+++', '(((', ')))'
+      ] }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+  })
+
+  describe('canonicalize option', () => {
+    it('should be false by default', () => {
+      const str1 = 'AmwÉ23'
+      const str2 = '2varnve3'
+      const result = isAnagram(str1, str2)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should work with with the canonicalize option', () => {
+      const str1 = 'AmwÉ23'
+      const str2 = '2varnve3'
+      const options = { canonicalize: true }
+      const result = isAnagram(str1, str2, options)
+      const expected = true
+      expect(result).to.equal(expected)
+    })
+  })
+})

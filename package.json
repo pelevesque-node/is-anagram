@@ -1,0 +1,39 @@
+{
+  "name": "@pelevesque/is-anagram",
+  "version": "0.0.1",
+  "description": "Checks if a string is an anagram with extra features not seen in other anagram checkers.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=6.4.0"
+  },
+  "scripts": {
+    "test": "standard && mocha --reporter spec",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pelevesque/is-anagram.git"
+  },
+  "keywords": [
+    "anagram"
+  ],
+  "author": "Pierre-Emmanuel Lévesque <pierre.e.levesque@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pelevesque/is-anagram/issues"
+  },
+  "homepage": "https://github.com/pelevesque/is-anagram#readme",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.4",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.1.4",
+    "standard": "^12.0.1"
+  },
+  "dependencies": {
+    "@pelevesque/canonicalize-string": "0.0.2"
+  }
+}
