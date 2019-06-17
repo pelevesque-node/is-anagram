@@ -21,7 +21,7 @@ module.exports = (str1, str2, o = {}) => {
 
   if (typeof o.substringsToIgnore === 'undefined') o.substringsToIgnore = []
   if (typeof o.canonicalize === 'undefined') o.canonicalize = false
-  if (typeof o.group === 'undefined') o.group = null
+  if (typeof o.groupBy === 'undefined') o.groupBy = null
 
   o.substringsToIgnore.forEach(substring => {
     substring = escapeRegexReservedChars(substring)
@@ -40,15 +40,15 @@ module.exports = (str1, str2, o = {}) => {
 
   let elements = []
 
-  if (o.group === null) {
+  if (o.groupBy === null) {
     elements = str1.split('')
-  } else if (Array.isArray(o.group)) {
-    elements = o.group
+  } else if (Array.isArray(o.groupBy)) {
+    elements = o.groupBy
     elements.sort(function (a, b) { return b.length - a.length })
     str1 = removeSubstrings(str1, elements)
     if (str1 !== '') return false
-  } else if (typeof o.group === 'number') {
-    const re = new RegExp('.{1,' + o.group + '}', 'g')
+  } else if (typeof o.groupBy === 'number') {
+    const re = new RegExp('.{1,' + o.groupBy + '}', 'g')
     elements = str1.match(re)
   } else {
     return false

@@ -84,7 +84,7 @@ String elements become grouped by a certain length.
 ```js
 const str1 = 'aabbcc'
 const str2 = 'abcabc'
-const opts = { group: 2 }
+const opts = { groupBy: 2 }
 const result = isAnagram(str1, str2, opts)
 // result === false
 ```
@@ -92,7 +92,7 @@ const result = isAnagram(str1, str2, opts)
 ```js
 const str1 = 'aabbcc'
 const str2 = 'bbaacc'
-const opts = { group: 2 }
+const opts = { groupBy: 2 }
 const result = isAnagram(str1, str2, opts)
 // result === true
 ```
@@ -102,7 +102,7 @@ Leftover characters like `d` are kept in the anagram.
 ```js
 const str1 = 'aabbccd'
 const str2 = 'bbdaacc'
-const opts = { group: 2 }
+const opts = { groupBy: 2 }
 const result = isAnagram(str1, str2, opts)
 // result === true
 ```
@@ -114,7 +114,7 @@ You can specify each element of the anagram by using explicit grouping.
 ```js
 const str1 = '22boy$$a'
 const str2 = '2b2yo$a$'
-const opts = { group: ['22', 'boy', '$$', 'a'] }
+const opts = { groupBy: ['22', 'boy', '$$', 'a'] }
 const result = isAnagram(str1, str2, opts)
 // result === false
 ```
@@ -122,7 +122,7 @@ const result = isAnagram(str1, str2, opts)
 ```js
 const str1 = '22boy$$a'
 const str2 = '$$aboy22'
-const opts = { group: ['22', 'boy', '$$', 'a'] }
+const opts = { groupBy: ['22', 'boy', '$$', 'a'] }
 const result = isAnagram(str1, str2, opts)
 // result === true
 ```
@@ -130,7 +130,7 @@ const result = isAnagram(str1, str2, opts)
 ```js
 const str1 = '1212'
 const str2 = '2121'
-const opts = { group: ['1', '2', '12'] }
+const opts = { groupBy: ['1', '2', '12'] }
 const result = isAnagram(str1, str2, opts)
 // result === false
 ```
@@ -138,7 +138,7 @@ const result = isAnagram(str1, str2, opts)
 ```js
 const str1 = '1212'
 const str2 = '1221'
-const opts = { group: ['1', '2', '12'] }
+const opts = { groupBy: ['1', '2', '12'] }
 const result = isAnagram(str1, str2, opts)
 // result === true
 ```
@@ -149,7 +149,7 @@ const result = isAnagram(str1, str2, opts)
 const str1 = ' AmwÉ23 45$$'
 const str2 = '2345n$$ ve$$arv '
 const opts = {
-  group: ['ar', 'n', 'v', 've', '2345'],
+  groupBy: ['ar', 'n', 'v', 've', '2345'],
   substringsToIgnore: [' ', '$$'],
   canonicalize: true
 }

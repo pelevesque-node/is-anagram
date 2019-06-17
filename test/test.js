@@ -57,11 +57,11 @@ describe('#isAnagram()', () => {
     })
   })
 
-  describe('anagrams with the numbered group option', () => {
+  describe('anagrams with the numbered groupBy option', () => {
     it('should return false when it is not an anagram', () => {
       const str1 = '123aaa345'
       const str2 = 'a123a345a'
-      const options = { group: 3 }
+      const options = { groupBy: 3 }
       const result = isAnagram(str1, str2, options)
       const expected = false
       expect(result).to.equal(expected)
@@ -70,7 +70,7 @@ describe('#isAnagram()', () => {
     it('should return true for an anagram', () => {
       const str1 = '123aaa345'
       const str2 = '345123aaa'
-      const options = { group: 3 }
+      const options = { groupBy: 3 }
       const result = isAnagram(str1, str2, options)
       const expected = true
       expect(result).to.equal(expected)
@@ -79,7 +79,7 @@ describe('#isAnagram()', () => {
     it('should return true for an anagram with a tail (extra chars after grouping)', () => {
       const str1 = '123aaa345f'
       const str2 = '345f123aaa'
-      const options = { group: 3 }
+      const options = { groupBy: 3 }
       const result = isAnagram(str1, str2, options)
       const expected = true
       expect(result).to.equal(expected)
@@ -90,7 +90,7 @@ describe('#isAnagram()', () => {
         const str1 = ' AmwÉ23 45$$'
         const str2 = '5n4$$ v2a3ve$$a '
         const options = {
-          group: 2,
+          groupBy: 2,
           substringsToIgnore: [' ', '$$'],
           canonicalize: true
         }
@@ -103,7 +103,7 @@ describe('#isAnagram()', () => {
         const str1 = ' AmwÉ23 45$$'
         const str2 = '45$$ nv23ve$$ar '
         const options = {
-          group: 2,
+          groupBy: 2,
           substringsToIgnore: [' ', '$$'],
           canonicalize: true
         }
@@ -114,11 +114,11 @@ describe('#isAnagram()', () => {
     })
   })
 
-  describe('anagrams with the explicit group option', () => {
+  describe('anagrams with the explicit groupNy option', () => {
     it('should return false when it is not an anagram', () => {
       const str1 = 'a12bbb3'
       const str2 = 'ba1bb32'
-      const options = { group: ['a', '12', 'bbb', '3'] }
+      const options = { groupBy: ['a', '12', 'bbb', '3'] }
       const result = isAnagram(str1, str2, options)
       const expected = false
       expect(result).to.equal(expected)
@@ -127,7 +127,7 @@ describe('#isAnagram()', () => {
     it('should return true for an anagram', () => {
       const str1 = '1a12bbb32'
       const str2 = '12bbb3a12'
-      const options = { group: ['a', '1', '2', '12', 'bbb', '3'] }
+      const options = { groupBy: ['a', '1', '2', '12', 'bbb', '3'] }
       const result = isAnagram(str1, str2, options)
       const expected = true
       expect(result).to.equal(expected)
@@ -138,7 +138,7 @@ describe('#isAnagram()', () => {
         const str1 = ' AmwÉ23 45$$'
         const str2 = '23n$$ ve$$arv 45 '
         const options = {
-          group: ['ar', 'n', 'v', 've', '2345'],
+          groupBy: ['ar', 'n', 'v', 've', '2345'],
           substringsToIgnore: [' ', '$$'],
           canonicalize: true
         }
@@ -151,7 +151,7 @@ describe('#isAnagram()', () => {
         const str1 = ' AmwÉ23 45$$'
         const str2 = '2345n$$ ve$$arv '
         const options = {
-          group: ['ar', 'n', 'v', 've', '2345'],
+          groupBy: ['ar', 'n', 'v', 've', '2345'],
           substringsToIgnore: [' ', '$$'],
           canonicalize: true
         }
