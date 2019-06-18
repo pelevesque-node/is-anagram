@@ -1,6 +1,6 @@
 {
   "name": "@pelevesque/is-anagram",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Checks if a string is an anagram with extra features not seen in other anagram checkers.",
   "main": "index.js",
   "engines": {
