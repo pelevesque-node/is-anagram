@@ -26,6 +26,14 @@ https://www.npmjs.com/package/@pelevesque/is-anagram
 
 ## Usage
 
+### Parameters
+
+```js
+str1    (required)
+str2    (required)
+options (optional) default = { groupBy = null, canonicalize = false, substringsToIgnore = [] }
+```
+
 ### Requiring
 
 ```js

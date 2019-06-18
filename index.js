@@ -16,21 +16,19 @@ function escapeRegexReservedChars (str) {
   return str.replace(re, '\\$1')
 }
 
-module.exports = (str1, str2, o = {}) => {
+module.exports = (str1, str2,
+  { groupBy = null, canonicalize = false, substringsToIgnore = [] } = {}
+) => {
   if (str1 === '' || str2 === '') return false
 
-  if (typeof o.substringsToIgnore === 'undefined') o.substringsToIgnore = []
-  if (typeof o.canonicalize === 'undefined') o.canonicalize = false
-  if (typeof o.groupBy === 'undefined') o.groupBy = null
-
-  o.substringsToIgnore.forEach(substring => {
+  substringsToIgnore.forEach(substring => {
     substring = escapeRegexReservedChars(substring)
     const re = new RegExp(substring, 'g')
     str1 = str1.replace(re, '')
     str2 = str2.replace(re, '')
   })
 
-  if (o.canonicalize) {
+  if (canonicalize) {
     str1 = canonicalizeString(str1)
     str2 = canonicalizeString(str2)
   }
@@ -40,15 +38,15 @@ module.exports = (str1, str2, o = {}) => {
 
   let elements = []
 
-  if (o.groupBy === null) {
+  if (groupBy === null) {
     elements = str1.split('')
-  } else if (Array.isArray(o.groupBy)) {
-    elements = o.groupBy
+  } else if (Array.isArray(groupBy)) {
+    elements = groupBy
     elements.sort(function (a, b) { return b.length - a.length })
     str1 = removeSubstrings(str1, elements)
     if (str1 !== '') return false
-  } else if (typeof o.groupBy === 'number') {
-    const re = new RegExp('.{1,' + o.groupBy + '}', 'g')
+  } else if (typeof groupBy === 'number') {
+    const re = new RegExp('.{1,' + groupBy + '}', 'g')
     elements = str1.match(re)
   } else {
     return false
