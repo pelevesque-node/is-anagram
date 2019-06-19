@@ -31,7 +31,7 @@ https://www.npmjs.com/package/@pelevesque/is-anagram
 ```js
 str1    (required)
 str2    (required)
-options (optional) default = { groupBy = null, canonicalize = false, substringsToIgnore = [] }
+options (optional) default = { groupBy: 1, canonicalize: false, substringsToIgnore: [] }
 ```
 
 ### Requiring

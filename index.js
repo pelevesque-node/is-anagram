@@ -17,7 +17,7 @@ function escapeRegexReservedChars (str) {
 }
 
 module.exports = (str1, str2,
-  { groupBy = null, canonicalize = false, substringsToIgnore = [] } = {}
+  { groupBy = 1, canonicalize = false, substringsToIgnore = [] } = {}
 ) => {
   if (str1 === '' || str2 === '') return false
 
@@ -38,16 +38,18 @@ module.exports = (str1, str2,
 
   let elements = []
 
-  if (groupBy === null) {
-    elements = str1.split('')
+  if (typeof groupBy === 'number') {
+    if (groupBy === 1) {
+      elements = str1.split('')
+    } else {
+      const re = new RegExp('.{1,' + groupBy + '}', 'g')
+      elements = str1.match(re)
+    }
   } else if (Array.isArray(groupBy)) {
     elements = groupBy
     elements.sort(function (a, b) { return b.length - a.length })
     str1 = removeSubstrings(str1, elements)
     if (str1 !== '') return false
-  } else if (typeof groupBy === 'number') {
-    const re = new RegExp('.{1,' + groupBy + '}', 'g')
-    elements = str1.match(re)
   } else {
     return false
   }
