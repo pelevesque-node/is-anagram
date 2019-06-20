@@ -34,7 +34,6 @@ module.exports = (str1, str2,
   }
 
   if (str1.length !== str2.length) return false
-  if (str1.localeCompare(str2) === 0) return true // same string
 
   let elements = []
 

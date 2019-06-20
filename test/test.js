@@ -124,6 +124,24 @@ describe('#isAnagram()', () => {
       expect(result).to.equal(expected)
     })
 
+    it('should return false for similar strings unrelated to groupBy substrings', () => {
+      const str1 = 'aaa'
+      const str2 = 'aaa'
+      const options = { groupBy: ['a', '1', '2', '12', 'bbb', '3'] }
+      const result = isAnagram(str1, str2, options)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
+    it('should return false for anagrams unrelated to groupBy substrings', () => {
+      const str1 = 'elvis'
+      const str2 = 'lives'
+      const options = { groupBy: ['a', '1', '2', '12', 'bbb', '3'] }
+      const result = isAnagram(str1, str2, options)
+      const expected = false
+      expect(result).to.equal(expected)
+    })
+
     it('should return true for an anagram', () => {
       const str1 = '1a12bbb32'
       const str2 = '12bbb3a12'
