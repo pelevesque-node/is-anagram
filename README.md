@@ -115,7 +115,7 @@ const result = isAnagram(str1, str2, opts)
 // result === true
 ```
 
-### Explicit grouping
+### Explicit Grouping
 
 You can specify each element of the anagram by using explicit grouping.
 
