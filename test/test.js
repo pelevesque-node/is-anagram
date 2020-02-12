@@ -210,9 +210,11 @@ describe('#isAnagram()', () => {
     it('should work with all single chars that must be escaped in regex', () => {
       const str1 = 'elvis[\\^$.|?*+()'
       const str2 = '[\\^$.|?*+()lives'
-      const options = { substringsToIgnore: [
-        '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'
-      ] }
+      const options = {
+        substringsToIgnore: [
+          '[', '\\', '^', '$', '.', '|', '?', '*', '+', '(', ')'
+        ]
+      }
       const result = isAnagram(str1, str2, options)
       const expected = true
       expect(result).to.equal(expected)
@@ -221,9 +223,11 @@ describe('#isAnagram()', () => {
     it('should work with all substrings of any length that must be escaped in regex', () => {
       const str1 = 'elvis[[[\\\\\\^^^$$$...|||???***+++((()))'
       const str2 = '[[[\\\\\\^^^$$$...|||???***+++((()))lives'
-      const options = { substringsToIgnore: [
-        '[[[', '\\\\\\', '^^^', '$$$', '...', '|||', '???', '***', '+++', '(((', ')))'
-      ] }
+      const options = {
+        substringsToIgnore: [
+          '[[[', '\\\\\\', '^^^', '$$$', '...', '|||', '???', '***', '+++', '(((', ')))'
+        ]
+      }
       const result = isAnagram(str1, str2, options)
       const expected = true
       expect(result).to.equal(expected)
