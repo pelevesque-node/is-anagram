@@ -78,7 +78,7 @@ const result = isAnagram(str1, str2, opts)
 
 ```js
 const str1 = 'AmwÉ'
-const str2 = 'arnvve'
+const str2 = 'arnwe'
 const opts = { canonicalize: true }
 const result = isAnagram(str1, str2, opts)
 // result === true
@@ -153,10 +153,10 @@ const result = isAnagram(str1, str2, opts)
 ### Mixtures
 
 ```js
-const str1 = ' AmwÉ23 45$$'
-const str2 = '2345n$$ ve$$arv '
+const str1 = ' AmÉ23 45$$'
+const str2 = '2345n$$ e$$ar '
 const opts = {
-  groupBy: ['ar', 'n', 'v', 've', '2345'],
+  groupBy: ['ar', 'n', 'e', '2345'],
   substringsToIgnore: [' ', '$$'],
   canonicalize: true
 }
