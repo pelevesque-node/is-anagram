@@ -36,6 +36,6 @@
     "standard": "^14.3.1"
   },
   "dependencies": {
-    "@pelevesque/canonicalize-string": "^0.0.5"
+    "@pelevesque/canonicalize-string": "^0.0.6"
   }
 }
