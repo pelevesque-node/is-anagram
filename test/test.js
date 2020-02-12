@@ -87,8 +87,8 @@ describe('#isAnagram()', () => {
 
     describe('with other options', () => {
       it('should return false when grouping is not respected', () => {
-        const str1 = ' AmwÉ23 45$$'
-        const str2 = '5n4$$ v2a3ve$$a '
+        const str1 = ' AmÉ23 45$$'
+        const str2 = '5n4$$ 2a3e$$a '
         const options = {
           groupBy: 2,
           substringsToIgnore: [' ', '$$'],
@@ -100,8 +100,8 @@ describe('#isAnagram()', () => {
       })
 
       it('should return true when grouping is respected', () => {
-        const str1 = ' AmwÉ23 45$$'
-        const str2 = '45$$ nv23ve$$ar '
+        const str1 = ' AÉm23 45$$'
+        const str2 = '45$$ 23ae$$rn '
         const options = {
           groupBy: 2,
           substringsToIgnore: [' ', '$$'],
@@ -153,10 +153,10 @@ describe('#isAnagram()', () => {
 
     describe('with other options', () => {
       it('should return false when grouping is not respected', () => {
-        const str1 = ' AmwÉ23 45$$'
-        const str2 = '23n$$ ve$$arv 45 '
+        const str1 = ' AmÉ23 45$$'
+        const str2 = '23n$$ e$$ar 45 '
         const options = {
-          groupBy: ['ar', 'n', 'v', 've', '2345'],
+          groupBy: ['are', 'n', '2345'],
           substringsToIgnore: [' ', '$$'],
           canonicalize: true
         }
@@ -166,10 +166,10 @@ describe('#isAnagram()', () => {
       })
 
       it('should return true when grouping is respected', () => {
-        const str1 = ' AmwÉ23 45$$'
-        const str2 = '2345n$$ ve$$arv '
+        const str1 = ' AmÉ23 45$$'
+        const str2 = '2345n$$ e$$ar '
         const options = {
-          groupBy: ['ar', 'n', 'v', 've', '2345'],
+          groupBy: ['ar', 'n', 'e', '2345'],
           substringsToIgnore: [' ', '$$'],
           canonicalize: true
         }
@@ -244,8 +244,8 @@ describe('#isAnagram()', () => {
     })
 
     it('should work with with the canonicalize option', () => {
-      const str1 = 'AmwÉ23'
-      const str2 = '2varnve3'
+      const str1 = 'AmÉ23'
+      const str2 = '2arne3'
       const options = { canonicalize: true }
       const result = isAnagram(str1, str2, options)
       const expected = true
